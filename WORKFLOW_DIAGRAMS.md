@@ -124,22 +124,22 @@ graph LR
     end
     
     subgraph "NLP Processing"
-        B[Intent: weather_inquiry]
-        C[Entities: {location: "Tokyo"}]
-        D[Tools: ["weather"]]
+        B["Intent: weather_inquiry"]
+        C["Entities: {location: 'Tokyo'}"]
+        D["Tools: ['weather']"]
     end
     
     subgraph "MCP Function Call"
-        E[weather.get_weather]
-        F[Parameters: {location: "Tokyo"}]
-        G[Status: LOADING]
-        H[Response: {temperature: 22, condition: "Cloudy"}]
-        I[Status: SUCCESS]
+        E["weather.get_weather"]
+        F["Parameters: {location: 'Tokyo'}"]
+        G["Status: LOADING"]
+        H["Response: {temperature: 22, condition: 'Cloudy'}"]
+        I["Status: SUCCESS"]
     end
     
     subgraph "Response Generation"
-        J[Format Weather Data]
-        K[Add Emojis & Formatting]
+        J["Format Weather Data"]
+        K["Add Emojis & Formatting"]
         L["🌡️ Temperature: 22°C\n☁️ Condition: Cloudy"]
     end
     
@@ -161,38 +161,38 @@ graph LR
 ## 🍽️ Restaurant Search Example - Complete Flow
 
 ```mermaid
-graph TD
-    Start([User: "Find Italian restaurants near Eiffel Tower"])
+flowchart TD
+    Start(["User: \"Find Italian restaurants near Eiffel Tower\""])
     
     Start --> NLP1[Natural Language Processing]
-    NLP1 --> Intent{Intent Detection}
+    NLP1 --> Intent["Intent Detection"]
     Intent -->|restaurant_inquiry| Entities[Entity Extraction]
-    Entities --> Location{Location: "Eiffel Tower"}
-    Entities --> Cuisine{Cuisine: "Italian"}
+    Entities --> Location["Location: Eiffel Tower"]
+    Entities --> Cuisine["Cuisine: Italian"]
     
     Location --> MCPCall[MCP Function Call]
     Cuisine --> MCPCall
     
-    MCPCall --> FuncName[Function: restaurants.search_restaurants]
-    FuncName --> Params[Parameters: {location: "Eiffel Tower", cuisine: "Italian"}]
+    MCPCall --> FuncName["Function: restaurants.search_restaurants"]
+    FuncName --> Params["Parameters: location: 'Eiffel Tower', cuisine: 'Italian'"]
     
-    Params --> Visualization[🔧 MCP Visualization]
-    Visualization --> Display1[Display: restaurants.search_restaurants [LOADING]]
-    Display1 --> Display2[Display: Parameters JSON]
+    Params --> Visualization["🔧 MCP Visualization"]
+    Visualization --> Display1["Display: restaurants.search_restaurants (LOADING)"]
+    Display1 --> Display2["Display: Parameters JSON"]
     
     Params --> API[API Execution]
-    API --> Response{API Response}
+    API --> Response["API Response"]
     
     Response -->|Success| Results[Restaurant Results]
     Results --> Format[Format Response]
-    Format --> Display3[Display: Restaurant List with Ratings]
+    Format --> Display3["Display: Restaurant List with Ratings"]
     
     Response -->|Error| Error[Error Handling]
-    Error --> Display4[Display: Error Message]
+    Error --> Display4["Display: Error Message"]
     
     Format --> NLG[Natural Language Generation]
     NLG --> Final[Final Response]
-    Final --> User[👤 User sees: "Here are Italian restaurants near Eiffel Tower..."]
+    Final --> User["👤 User sees: \"Here are Italian restaurants near Eiffel Tower...\""]
 ```
 
 ## ⚡ Real-Time Function Call Visualization
