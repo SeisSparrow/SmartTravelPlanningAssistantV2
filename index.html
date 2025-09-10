@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel Planning Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1><i class="fas fa-plane"></i> Smart Travel Assistant</h1>
+                <div class="connection-status">
+                    <span id="mcp-status" class="status-indicator">
+                        <i class="fas fa-circle"></i> MCP Disconnected
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Tool Panel (Left Side) -->
+            <aside class="tool-panel">
+                <div class="panel-header">
+                    <h3><i class="fas fa-tools"></i> MCP Tools</h3>
+                </div>
+                <div class="tool-categories">
+                    <div class="tool-category">
+                        <h4><i class="fas fa-cloud-sun"></i> Weather</h4>
+                        <div class="tool-status" id="weather-status">
+                            <span class="status-dot offline"></span>
+                            <span class="tool-name">Weather Service</span>
+                        </div>
+                    </div>
+                    <div class="tool-category">
+                        <h4><i class="fas fa-map-marked-alt"></i> Maps & Location</h4>
+                        <div class="tool-status" id="maps-status">
+                            <span class="status-dot offline"></span>
+                            <span class="tool-name">Map Service</span>
+                        </div>
+                    </div>
+                    <div class="tool-category">
+                        <h4><i class="fas fa-utensils"></i> Restaurants</h4>
+                        <div class="tool-status" id="restaurant-status">
+                            <span class="status-dot offline"></span>
+                            <span class="tool-name">Restaurant Finder</span>
+                        </div>
+                    </div>
+                    <div class="tool-category">
+                        <h4><i class="fas fa-plane-departure"></i> Flights</h4>
+                        <div class="tool-status" id="flight-status">
+                            <span class="status-dot offline"></span>
+                            <span class="tool-name">Flight Search</span>
+                        </div>
+                    </div>
+                    <div class="tool-category">
+                        <h4><i class="fas fa-hotel"></i> Hotels</h4>
+                        <div class="tool-status" id="hotel-status">
+                            <span class="status-dot offline"></span>
+                            <span class="tool-name">Hotel Booking</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool Activity Log -->
+                <div class="tool-activity">
+                    <h4><i class="fas fa-history"></i> Recent Activity</h4>
+                    <div id="tool-log" class="tool-log">
+                        <div class="log-entry">
+                            <span class="timestamp">System ready</span>
+                            <span class="activity">Waiting for user input...</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chat Interface (Right Side) -->
+            <main class="chat-container">
+                <div class="chat-header">
+                    <h3><i class="fas fa-comments"></i> Travel Planning Chat</h3>
+                    <div class="chat-controls">
+                        <button id="clear-chat" class="btn-icon" title="Clear chat">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div id="chat-messages" class="chat-messages">
+                    <div class="message system-message">
+                        <div class="message-content">
+                            <p>👋 Hello! I'm your Smart Travel Planning Assistant. I can help you plan your perfect trip using real-time data from various services.</p>
+                            <p>Try asking me things like:</p>
+                            <ul>
+                                <li>"What's the weather like in Paris next week?"</li>
+                                <li>"Find me restaurants near the Eiffel Tower"</li>
+                                <li>"Plan a 3-day trip to Tokyo"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="chat-input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="chat-input" 
+                            class="chat-input" 
+                            placeholder="Ask me about travel planning, weather, restaurants, flights, or hotels..."
+                            rows="1"
+                        ></textarea>
+                        <button id="send-button" class="send-button" disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-footer">
+                        <span class="input-hint">Press Enter to send, Shift+Enter for new line</span>
+                        <div class="typing-indicator" id="typing-indicator" style="display: none;">
+                            <span class="typing-dot"></span>
+                            <span class="typing-dot"></span>
+                            <span class="typing-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="mcp-client.js"></script>
+    <script src="chat-interface.js"></script>
+    <script src="travel-assistant.js"></script>
+</body>
+</html>
