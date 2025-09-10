@@ -109,7 +109,14 @@ class MCPClient {
             throw new Error(`Tool ${toolName} is not available on server ${serverId}`);
         }
         
+        // Log to both activity log and function visualization
         this.logActivity(`Calling ${toolName} on ${connection.name}`, 'info', parameters);
+        
+        // Log to function visualization if available
+        if (window.mcpViz) {
+            const callId = window.mcpViz.logFunctionCall(serverId, toolName, parameters);
+        }
+        
         this.updateServerStatus(serverId, 'loading');
         
         try {

@@ -133,6 +133,43 @@
     <!-- Scripts -->
     <script src="mcp-client.js"></script>
     <script src="chat-interface.js"></script>
+    <script src="mcp-function-visualization.js"></script>
     <script src="travel-assistant.js"></script>
+    <script src="real-api-integration.js"></script>
+    
+    <!-- Initialize enhanced MCP function visualization -->
+    <script>
+        // Enhanced MCP function call logging
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Enhanced MCP Function Visualization loaded!');
+            
+            // Override the original MCP client's callTool method to add visualization
+            const originalCallTool = window.mcpClient.callTool.bind(window.mcpClient);
+            
+            window.mcpClient.callTool = async function(serverId, toolName, parameters = {}) {
+                console.log(`🔧 MCP Function Call: ${serverId}.${toolName}`, parameters);
+                
+                // Log to function visualization
+                const callId = window.mcpViz ? window.mcpViz.logFunctionCall(serverId, toolName, parameters) : null;
+                
+                try {
+                    const result = await originalCallTool(serverId, toolName, parameters);
+                    
+                    // Log successful response
+                    if (window.mcpViz && callId) {
+                        window.mcpViz.logFunctionResponse(callId, result);
+                    }
+                    
+                    return result;
+                } catch (error) {
+                    // Log error
+                    if (window.mcpViz && callId) {
+                        window.mcpViz.logFunctionError(callId, error);
+                    }
+                    throw error;
+                }
+            };
+        });
+    </script>
 </body>
 </html>
